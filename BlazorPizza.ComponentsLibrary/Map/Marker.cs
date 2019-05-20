@@ -1,4 +1,4 @@
-﻿namespace BlazingPizza.ComponentsLibrary.Map
+﻿namespace BlazorPizza.ComponentsLibrary.Map
 {
     public class Marker
     {

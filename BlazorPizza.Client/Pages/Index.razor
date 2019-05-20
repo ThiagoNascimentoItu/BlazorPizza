@@ -1,7 +1,6 @@
 ﻿@page "/"
 @inject HttpClient Http
-
-    
+@using BlazorPizza.Shared  
 
 <div class="main">
     <ul class="pizza-cards">
@@ -10,7 +9,7 @@
         {
             @foreach (var special in specials)
             {
-                <li onclick="@(() => Console.WriteLine(special.Name))" style="background-image: url('@special.ImageUrl)">
+                <li onclick="@(() => ShowConfigurePizzaDialog(special))" style="background-image: url('@special.ImageUrl')">
                     <div class="pizza-info">
                         <span class="title">@special.Name</span>
                         @special.Description
@@ -19,17 +18,56 @@
                 </li>
             }
         }
+        @if (showingConfigureDialog)
+        {
+            <ConfigurePizzaDialog Pizza="configuringPizza" 
+                                  OnCancel="CancelConfigurePizzaDialog"
+                                  OnConfirm="ConfirmConfigurePizzaDialog"/>
+        }
+       
     </ul>
     
 
 </div>
 
-@functions{
+@functions{       
+
     List<PizzaSpecial> specials;
+    Pizza configuringPizza;
+    bool showingConfigureDialog;
+    Order order = new Order();
 
     protected async override Task OnInitAsync()
     {
         specials = await Http.GetJsonAsync<List<PizzaSpecial>>("specials");
 
     }
+
+
+    void ShowConfigurePizzaDialog(PizzaSpecial special)
+    {
+        configuringPizza = new Pizza()
+        {
+            Special = special,
+            SpecialId = special.Id,
+            Size = Pizza.DefaultSize,
+            Toppings = new List<PizzaTopping>(),
+        };
+        showingConfigureDialog = true;
+    }
+
+    void CancelConfigurePizzaDialog()
+    {
+        configuringPizza = null;
+        showingConfigureDialog = false;
+        StateHasChanged();
+    }
+    void ConfirmConfigurePizzaDialog()
+    {
+        order.Pizzas.Add(configuringPizza);
+        configuringPizza = null;
+        showingConfigureDialog = false;
+        StateHasChanged();
+    }
+
 }

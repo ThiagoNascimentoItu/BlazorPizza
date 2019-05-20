@@ -1,4 +1,4 @@
-﻿using BlazingPizza.ComponentsLibrary.Authentication;
+﻿using BlazorPizza.ComponentsLibrary.Authentication;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Twitter;

@@ -123,12 +123,11 @@ namespace BlazorPizza.Server.Controllers
             var specials = new PizzaSpecial[]
             {
                 new PizzaSpecial()
-                {
-                     
-                      Name = "Basic Cheese Pizza",
-                      Description = "It's cheesy and delicious. Why wouldn't you want one?",
-                      BasePrice = 9.99m,
-                      ImageUrl = "/img/pizzas/cheese.jpg",
+                {   
+                    Name = "Basic Cheese Pizza",
+                    Description = "It's cheesy and delicious. Why wouldn't you want one?",
+                    BasePrice = 9.99m,
+                    ImageUrl = "img/pizzas/cheese.jpg",
                 },
                 new PizzaSpecial()
                 {

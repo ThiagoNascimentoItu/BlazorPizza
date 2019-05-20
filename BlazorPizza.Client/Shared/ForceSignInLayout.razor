@@ -1,0 +1,24 @@
+﻿@*@inherits LayoutComponentBase
+@layout MainLayout
+@using BlazorPizza.ComponentsLibrary.
+
+@if (UserState.CurrentUser == null)
+{
+    <text> Loading...</text>
+}
+else if (UserState.IsloggedIn)
+{
+    @Body
+}
+else
+{
+    <div class="main">
+        <h2>You're signed out</h2>
+        <p>To continue, please sign in.</p>
+        <button class="btn btn-danger" onclick="@UserState.SignIn">Sign in</button>
+    </div>
+}
+
+@functions{
+    [CascadingParameter] UserStateProvider UserState { get; set; }
+}*@
